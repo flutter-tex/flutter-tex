@@ -1,3 +1,5 @@
+import 'utils.dart';
+
 const Map<String, Map<String, CharInfo>> symbols = {
   'math': {},
   'text': {},
@@ -6,11 +8,6 @@ const Map<String, Map<String, CharInfo>> symbols = {
 enum Font {
   Main,
   AMS,
-}
-
-enum Mode {
-  Math,
-  Text,
 }
 
 const ATOMS = {
@@ -896,7 +893,6 @@ void defineTable() {
 // \textdegree from inputenc package
   defineSymbol(text, main, textord, '\u00b0', '\\textdegree',
       acceptUnicodeChar: true);
-// TODO: In LaTeX, \pounds can generate a different character in text and math
 // mode, but among our fonts, only Main-Italic defines this character '163'.
   defineSymbol(math, main, mathord, '\u00a3', '\\pounds');
   defineSymbol(math, main, mathord, '\u00a3', '\\mathsterling',
@@ -1010,8 +1006,6 @@ void defineTable() {
       defineSymbol(math, main, mathord, ch, wideChar);
       defineSymbol(text, main, textord, ch, wideChar);
     }
-
-    // TODO: Add bold script when it is supported by a KaTeX font.
   }
 // 'k' is the only double struck lower case letter in the KaTeX fonts.
   wideChar = String.fromCharCodes([0xD835, 0xDD5C]); // k double struck
@@ -1042,7 +1036,6 @@ void defineTable() {
 // We add these Latin-1 letters as symbols for backwards-compatibility,
 // but they are not actually in the font, nor are they supported by the
 // Unicode accent mechanism, so they fall back to Times font and look ugly.
-// TODO(edemaine): Fix this.
   const extraLatin = 'ÇÐÞçþ';
   for (var i = 0; i < extraLatin.length; i++) {
     final ch = extraLatin[i];
